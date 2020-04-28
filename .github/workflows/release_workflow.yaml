@@ -1,0 +1,15 @@
+workflow "Trigger a Buildkite Build" {
+  on = "push"
+  resolves = ["Build"]
+}
+
+action "Build" {
+  uses = "buildkite/trigger-pipeline-action@v1.2.0"
+  secrets = ["BUILDKITE_API_ACCESS_TOKEN"]
+  env = {
+    PIPELINE = "my-org/my-deploy-pipeline"
+    COMMIT = "HEAD"
+    BRANCH = "master"
+    MESSAGE = ":github: Triggered from a GitHub Action"
+  }
+}
