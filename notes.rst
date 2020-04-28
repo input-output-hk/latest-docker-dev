@@ -1,0 +1,6 @@
+- Wrote the workflow
+- Headeded to builkite, created a personal token and enabled:
+  - Organistation access
+  - Modify builds
+  - Graphql API Access (ask Rhys)
+- Added BUILDKITE_TOKEN to GitHub secrets
