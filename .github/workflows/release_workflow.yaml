@@ -7,7 +7,7 @@ action "Build" {
   uses = "buildkite/trigger-pipeline-action@v1.2.0"
   secrets = ["BUILDKITE_API_ACCESS_TOKEN"]
   env = {
-    PIPELINE = "my-org/my-deploy-pipeline"
+    PIPELINE = "input-output-hk/latest_docker_dev"
     COMMIT = "HEAD"
     BRANCH = "master"
     MESSAGE = ":github: Triggered from a GitHub Action"
