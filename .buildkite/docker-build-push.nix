@@ -68,12 +68,6 @@ in
         echo "Pushing $fullrepo:$tag"
         docker push "$fullrepo:$tag"
       fi
-      if [[ "$tag" = latest ]]; then
-        echo "Tagging as latest"
-        docker tag inputoutput/cardano-db-sync:$gitrev $fullrepo:latest
-        echo "Pushing $fullrepo:latest"
-        docker push "$fullrepo:latest"
-      fi
       echo "Cleaning up with docker system prune"
       docker system prune -f
     '') [ image ]}
