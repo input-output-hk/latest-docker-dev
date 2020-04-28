@@ -42,7 +42,8 @@ in
 
     export PATH=${lib.makeBinPath [ docker gnused ]}
 
-    fullrepo="${dockerHubRepoName}"
+    #fullrepo="${dockerHubRepoName}"
+    fullrepo="craigem/latest_docker_dev"
 
     echo '~~~ Pushing docker images'
 
