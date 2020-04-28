@@ -53,22 +53,22 @@ in
       tagged="$fullrepo:$tag"
       gitrev="${image.imageTag}"
       echo "Loading $fullrepo:$gitrev"
-      docker load -i "$fullrepo:$gitrev"
+      docker load -i ${image}
       echo "Pushing $fullrepo:$gitrev"
-      docker push "$fullrepo:$gitrev"
+      #docker push "$fullrepo:$gitrev"
       if [[ "$branch" = master ]]; then
         echo "Tagging as master"
-        docker tag $fullrepo:$gitrev $fullrepo:$branch
+        docker tag ${image} $fullrepo:$branch
         echo "Pushing $fullrepo:$branch"
         docker push "$fullrepo:$branch"
       fi
       if [[ "$tag" ]]; then
         echo "Tagging as $tag"
-        docker tag $fullrepo:$gitrev $fullrepo:$tag
+        docker tag ${image} $fullrepo:$tag
         echo "Pushing $fullrepo:$tag"
         docker push "$fullrepo:$tag"
         echo "Tagging as latest"
-        docker tag $fullrepo:$gitrev $fullrepo:latest
+        docker tag ${image} $fullrepo:latest
         echo "Pushing $fullrepo:latest"
         docker push "$fullrepo:latest"
       fi
