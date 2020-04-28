@@ -54,21 +54,21 @@ in
       gitrev="${image.imageTag}"
       echo "Loading $fullrepo:$gitrev"
       docker load -i ${image}
-      echo "Pushing $fullrepo:$gitrev"
+      #echo "Pushing $fullrepo:$gitrev"
       #docker push "$fullrepo:$gitrev"
       if [[ "$branch" = master ]]; then
         echo "Tagging as master"
-        docker tag ${image} $fullrepo:$branch
+        docker tag inputoutput/cardano-db-sync:$gitrev $fullrepo:$branch
         echo "Pushing $fullrepo:$branch"
         docker push "$fullrepo:$branch"
       fi
       if [[ "$tag" ]]; then
         echo "Tagging as $tag"
-        docker tag ${image} $fullrepo:$tag
+        docker tag inputoutput/cardano-db-sync:$gitrev $fullrepo:$tag
         echo "Pushing $fullrepo:$tag"
         docker push "$fullrepo:$tag"
         echo "Tagging as latest"
-        docker tag ${image} $fullrepo:latest
+        docker tag inputoutput/cardano-db-sync:$gitrev $fullrepo:latest
         echo "Pushing $fullrepo:latest"
         docker push "$fullrepo:latest"
       fi
