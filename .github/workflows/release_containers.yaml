@@ -1,2 +1,20 @@
-- name: Trigger Buildkite Pipeline
-  uses: buildkite/trigger-pipeline-action@v1.2.0
+name: Latest Docker Container
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+    test-job:
+    name: Test Job
+    runs-on: ???
+    steps:
+    - name: Trigger Buildkite Pipeline
+      uses: buildkite/trigger-pipeline-action@v1.2.0
+      secrets = ["BUILDKITE_API_ACCESS_TOKEN"]
+      env:
+        PIPELINE = "input-output-hk/latest_docker_dev"
+        COMMIT = "HEAD"
+        BRANCH = "master"
+        MESSAGE = ":github: Triggered from a GitHub Action"
