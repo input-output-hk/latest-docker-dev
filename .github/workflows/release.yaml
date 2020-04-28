@@ -7,7 +7,7 @@ on:
 
 jobs:
     test-job:
-      name: Test Job
+      name: Latest Release
       runs-on: ubuntu-latest
       steps:
       - name: Trigger Buildkite Pipeline

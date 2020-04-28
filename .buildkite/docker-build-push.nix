@@ -53,7 +53,7 @@ in
       tagged="$fullrepo:$tag"
       gitrev="${image.imageTag}"
       echo "Loading $fullrepo:$gitrev"
-      docker load -i ${image}
+      docker load -i "$fullrepo:$gitrev"
       echo "Pushing $fullrepo:$gitrev"
       docker push "$fullrepo:$gitrev"
       if [[ "$branch" = master ]]; then
