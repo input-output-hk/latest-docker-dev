@@ -18,3 +18,4 @@ jobs:
           COMMIT: "HEAD"
           BRANCH: "master"
           MESSAGE: ":github: Triggered from a GitHub Action"
+        run echo "Hello World!"
