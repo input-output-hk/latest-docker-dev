@@ -8,7 +8,7 @@ on:
 jobs:
     test-job:
     name: Test Job
-    runs-on: ???
+    runs-on: [self-hosted, buildkite]
     steps:
     - name: Print a greeting
       env:
