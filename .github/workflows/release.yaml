@@ -1,4 +1,4 @@
-name: Latest Docker Container
+name: Latest Release
 
 on:
   release:
@@ -7,7 +7,7 @@ on:
 
 jobs:
     test-job:
-      name: Latest Release
+      name: "Tag / Build / Push Container"
       runs-on: ubuntu-latest
       steps:
       - name: Trigger Buildkite Pipeline
