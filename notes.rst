@@ -4,3 +4,4 @@
   - Modify builds
   - Graphql API Access (ask Rhys)
 - Added BUILDKITE_TOKEN to GitHub secrets
+- Added "latest" to buildkite branch filters
