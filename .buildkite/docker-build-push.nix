@@ -66,6 +66,10 @@ in
         docker tag $fullrepo:$gitrev $fullrepo:$tag
         echo "Pushing $fullrepo:$tag"
         docker push "$fullrepo:$tag"
+        echo "Tagging as latest"
+        docker tag $fullrepo:$gitrev $fullrepo:latest
+        echo "Pushing $fullrepo:latest"
+        docker push "$fullrepo:latest"
       fi
       echo "Cleaning up with docker system prune"
       docker system prune -f
