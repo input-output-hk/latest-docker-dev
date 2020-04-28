@@ -1,20 +1,2 @@
-name: Latest Docker Container
-
-on:
-  release:
-    types:
-      - created
-
-jobs:
-    test-job:
-    name: Test Job
-    runs-on: [self-hosted, buildkite]
-    steps:
-    - name: Print a greeting
-      env:
-        MY_VAR: Hi there! My name is
-        FIRST_NAME: Mona
-        MIDDLE_NAME: The
-        LAST_NAME: Octocat
-      run: |
-        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+- name: Trigger Buildkite Pipeline
+  uses: buildkite/trigger-pipeline-action@v1.2.0
