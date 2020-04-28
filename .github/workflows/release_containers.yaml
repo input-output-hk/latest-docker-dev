@@ -8,7 +8,7 @@ on:
 jobs:
     test-job:
       name: Test Job
-      runs-on: [selfhosted, linux]
+      runs-on: ubuntu-latest
       steps:
       - name: Trigger Buildkite Pipeline
         uses: buildkite/trigger-pipeline-action@v1.2.0
