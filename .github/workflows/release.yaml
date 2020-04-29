@@ -14,7 +14,7 @@ jobs:
         uses: buildkite/trigger-pipeline-action@v1.2.0
         env:
           BUILDKITE_API_ACCESS_TOKEN: ${{ secrets.Buildkite_Token }}
-          PIPELINE: "input-output-hk/latest-docker-dev"
+          PIPELINE: {{ GITHUB_REPOSITORY }}
           COMMIT: "HEAD"
           BRANCH: "master"
           MESSAGE: ":github: Triggered from a GitHub Action"
