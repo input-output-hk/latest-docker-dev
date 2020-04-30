@@ -18,4 +18,4 @@ jobs:
           COMMIT: "HEAD"
           BRANCH: "master"
           MESSAGE: ":github: Triggered from a GitHub Action"
-          BUILD_ENV_VARS: "{\"GITHUB_REF\": \"${{ github.ref }}\"}"
+          BUILD_ENV_VARS: "{\"GITHUB_REF\": \"${{ github.ref }}\", \"GITHUB_EVENT_NAME\": \"${{ github.event_name }}\" }"
