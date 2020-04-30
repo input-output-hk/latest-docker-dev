@@ -60,11 +60,14 @@ in
 
   '' + concatMapStringsSep "\n" (image: ''
     branch="''${BUILDKITE_BRANCH:-}"
-    ref="''${GITHUB_REF:-}"
+    event="''${GITHUB_EVENT_NAME:-}"
 
     gitrev="${image.imageTag}"
 
+    ### HACK ###
     fullrepo="craigem/latest-docker-dev"
+    ### HACK ###
+
     echo "Loading $fullrepo:$gitrev"
     docker load -i ${image}
 
@@ -74,7 +77,8 @@ in
 
     # If there is a release, it needs to be tagged with the release
     # version (e.g. "v0.0.28") AND the "latest" tag
-    if [[ "$ref" ]]; then
+    if [[ "$event" = release ]]; then
+      ref="''${GITHUB_REF:-}"
       version="$(echo $ref | sed -e 's/refs\/tags\///')"
 
       echo "Tagging with a version number: $fullrepo:$version"
