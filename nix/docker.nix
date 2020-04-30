@@ -64,7 +64,7 @@
 , libpqxx
 , postgresql
 
-, dbSyncRepoName ? "inputoutput/latest-docker-dev"
+, dbSyncRepoName ? "craigem/latest-docker-dev"
 }:
 
 let
