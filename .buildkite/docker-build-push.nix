@@ -64,7 +64,7 @@ in
 
     gitrev="${image.imageTag}"
 
-    fullrepo="craigem/latest-docker-dev"
+    fullrepo="craigem/latest_docker_dev"
 
     echo "Loading $fullrepo:$gitrev"
     docker load -i ${image}
@@ -75,6 +75,19 @@ in
 
     # If there is a release, it needs to be tagged with the release
     # version (e.g. "v0.0.28") AND the "latest" tag
+    if [[ "$ref" ]]; then
+      version="$ref | sed -e s/refs\/tags\///"
+
+      echo "Tagging with a version number"
+      docker tag $fullrepo:$gitrev $fullrepo:$version
+      echo "Pushing $fullrepo:$version"
+      docker push "$fullrepo:$version"
+
+      echo "Tagging as latest"
+      docker tag $fullrepo:$gitrev $fullrepo:latest
+      echo "Pushing $fullrepo:latest"
+      docker push "$fullrepo:latest"
+    fi
 
     # Every commit to master needs to be tagged with master
     if [[ "$branch" = master ]]; then
