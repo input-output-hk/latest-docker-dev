@@ -64,14 +64,12 @@ in
 
     gitrev="${image.imageTag}"
 
-    fullrepo="craigem/latest_docker_dev"
-
     echo "Loading $fullrepo:$gitrev"
     docker load -i ${image}
 
     # Every commit gets a container with rev on end
-    # echo "Pushing $fullrepo:$gitrev"
-    # docker push "$fullrepo:$gitrev"
+    echo "Pushing $fullrepo:$gitrev"
+    docker push "$fullrepo:$gitrev"
 
     # If there is a release, it needs to be tagged with the release
     # version (e.g. "v0.0.28") AND the "latest" tag
@@ -84,7 +82,7 @@ in
       docker push "$fullrepo:$version"
 
       echo "Tagging as latest"
-      docker tag $fullrepo:$gitrev $fullrepo:latest
+      docker tag $fullrepo:$version $fullrepo:latest
       echo "Pushing $fullrepo:latest"
       docker push "$fullrepo:latest"
     fi

@@ -64,7 +64,7 @@
 , libpqxx
 , postgresql
 
-, dbSyncRepoName ? "inputoutput/cardano-db-sync"
+, dbSyncRepoName ? "inputoutput/latest-docker-dev"
 }:
 
 let
