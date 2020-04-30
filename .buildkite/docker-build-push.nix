@@ -76,8 +76,7 @@ in
     # If there is a release, it needs to be tagged with the release
     # version (e.g. "v0.0.28") AND the "latest" tag
     if [[ "$ref" ]]; then
-      echo "$ref"
-      version="$ref | sed -e s/refs\/tags\///"
+      version="$(echo $ref | sed -e s/refs\/tags\///)"
 
       echo "Tagging with a version number: $fullrepo:$version"
       docker tag $fullrepo:$gitrev $fullrepo:$version
