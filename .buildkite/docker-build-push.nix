@@ -64,7 +64,8 @@ in
 
     gitrev="${image.imageTag}"
 
-    fullrepo="craigem/latest_docker_dev"
+    fullrepo="craigem/latest-docker-dev"
+
     echo "Loading $fullrepo:$gitrev"
     docker load -i ${image}
 
