@@ -20,7 +20,7 @@
 , bashInteractive, coreutils, utillinux, iproute, iputils, curl, socat
 
 # Used to generate the docker image names
-, repoName ? "inputoutput/cardano-wallet"
+, repoName ? "inputoutput/latest-wallet-docker-dev"
 }:
 
 let

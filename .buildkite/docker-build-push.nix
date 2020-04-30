@@ -69,6 +69,10 @@ in
     fullrepo="${dockerHubRepoName}"
     ''}
 
+    ### HACK BEGIN
+    fullrepo="sevanspowell/latest-wallet-docker-dev"
+    ### HACK END
+
   '' + concatMapStringsSep "\n" (image: ''
     gitrev=${pkgs.iohkNix.commitIdFromGitRepoOrZero ../.git}
 
