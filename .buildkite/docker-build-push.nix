@@ -80,4 +80,4 @@ in
     echo "Pushing $fullrepo:latest"
     docker tag "$tagged" "$fullrepo:latest"
     docker push "$fullrepo:latest"
-  '') images)
+  '') [ image ] )
