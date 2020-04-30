@@ -27,7 +27,5 @@ List of Repos:
 inputoutput/cardano-node
 inputoutput/cardano-db-sync
 inputoutput/cardano-graphql
-inputoutput/cardano-explorer-api
-inputoutput/cardano-submit-api
+inputoutput/cardano-rest
 inputoutput/cardano-wallet
-inputoutput/cardano-tx-submit
