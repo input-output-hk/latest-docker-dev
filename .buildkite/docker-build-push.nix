@@ -60,24 +60,41 @@ in
 
   '' + concatMapStringsSep "\n" (image: ''
     branch="''${BUILDKITE_BRANCH:-}"
-    tag="''${BUILDKITE_TAG:-}"
-    if [[ -n "$tag" ]]; then
-      tag="${image.imageTag}"
-    elif [[ "$branch" = master ]]; then
-      tag="$(echo ${image.imageTag} | sed -e s/${image.version}/''${BUILDKITE_COMMIT:$branch}/)"
-    else
-      echo "Not pushing docker image because this is not a master branch or tag build."
-      exit 0
+    ref="''${GITHUB_REF:-}"
+
+    gitrev="${image.imageTag}"
+
+    echo "Loading $fullrepo:$gitrev"
+    docker load -i ${image}
+
+    # Every commit gets a container with rev on end
+    echo "Pushing $fullrepo:$gitrev"
+    docker push "$fullrepo:$gitrev"
+
+    # If there is a release, it needs to be tagged with the release
+    # version (e.g. "v0.0.28") AND the "latest" tag
+    if [[ "$ref" ]]
+      version="$ref | sed -e s/refs\/tags\///"
+
+      echo "Tagging with a version number"
+      docker tag $fullrepo:$gitrev $fullrepo:$version
+      echo "Pushing $fullrepo:$version"
+      docker push "$fullrepo:$version"
+
+      echo "Tagging as latest"
+      docker tag $fullrepo:$gitrev $fullrepo:latest
+      echo "Pushing $fullrepo:latest"
+      docker push "$fullrepo:latest"
     fi
-    echo "Loading ${image}"
-    tagged="$fullrepo:$tag"
-    docker load -i "${image}"
-    if [ "$tagged" != "${image.imageName}:${image.imageTag}" ]; then
-      docker tag "${image.imageName}:${image.imageTag}" "$tagged"
+
+    # Every commit to master needs to be tagged with master
+    if [[ "$branch" = master ]]; then
+      echo "Tagging as master"
+      docker tag $fullrepo:$gitrev $fullrepo:$branch
+      echo "Pushing $fullrepo:$branch"
+      docker push "$fullrepo:$branch"
     fi
-    echo "Pushing $tagged"
-    docker push "$tagged"
-    echo "Pushing $fullrepo:latest"
-    docker tag "$tagged" "$fullrepo:latest"
-    docker push "$fullrepo:latest"
+
+    echo "Cleaning up with docker system prune"
+    docker system prune -f
   '') [ image ] )
