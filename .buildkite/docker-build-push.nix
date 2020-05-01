@@ -109,6 +109,6 @@ in
         docker tag $fullrepo:$version $fullrepo:latest
         echo "Pushing $fullrepo:latest"
         docker push "$fullrepo:latest"
-      '' else '')}
+      '' else "")}
     fi
   '') images)
