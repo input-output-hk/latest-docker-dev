@@ -98,13 +98,18 @@ in
     event="''${GITHUB_EVENT_NAME:-}"
     if [[ true ]]; then
       ref="''${GITHUB_REF:-}"
-      ref="refs/tags/v1900-00-00"
-      version="$(echo $ref | sed -e 's/refs\/tags\///')"
+      ref="refs/tags/1900-00-00"
+      version="$(echo $ref | sed -e 's/refs\/tags\/v//')"
 
       echo "Tagging with a version number: $fullrepo:$version-${image.backend}"
-      docker tag $fullrepo:$gitrev-${image.backend} $fullrepo:$version-${image.backend}
+      docker tag "$fullrepo:$gitrev-${image.backend}" "$fullrepo:$version-${image.backend}"
       echo "Pushing $fullrepo:$version-${image.backend}"
       docker push "$fullrepo:$version-${image.backend}"
+
+      echo "Tagging with: $fullrepo:${image.backend}"
+      docker tag "$fullrepo:$version-${image.backend}" "$fullrepo:${image.backend}"
+      echo "Pushing $fullrepo:${image.backend}"
+      docker push "$fullrepo:${image.backend}"
 
       # Only apply latest to byron
       ${(if image.backend == "byron" then ''
