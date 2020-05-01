@@ -109,7 +109,7 @@ in
       # Only apply latest to byron
       ${(if image.backend == "byron" then ''
         echo "Tagging as latest"
-        docker tag $fullrepo:$version $fullrepo:latest
+        docker tag "$fullrepo:$version-${image.backend}" "$fullrepo:latest"
         echo "Pushing $fullrepo:latest"
         docker push "$fullrepo:latest"
       '' else "")}
