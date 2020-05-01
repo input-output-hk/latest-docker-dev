@@ -75,6 +75,7 @@ in
 
   '' + concatMapStringsSep "\n" (image: ''
     gitrev=${pkgs.iohkNix.commitIdFromGitRepoOrZero ../.git}
+    branch="''${BUILDKITE_BRANCH:-}"
 
     echo "Loading ${image}"
     docker load -i "${image}"
@@ -103,11 +104,11 @@ in
       docker push "$fullrepo:$version-${image.backend}"
 
       # Only apply latest to byron
-      ${if image.backend == "byron" then ''
+      ${(if image.backend == "byron" then ''
         echo "Tagging as latest"
         docker tag $fullrepo:$version $fullrepo:latest
         echo "Pushing $fullrepo:latest"
         docker push "$fullrepo:latest"
-      ''}
+      '' else '')}
     fi
   '') images)
