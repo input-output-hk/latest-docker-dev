@@ -87,7 +87,7 @@ in
     docker push "$fullrepo:$gitrev-${image.backend}"
 
     # If branch is master, tag with "dev-master-${image.backend}"
-    if [[ "$branch" ]]; then
+    if [[ "$branch" = master ]]; then
       docker tag "$fullrepo:$gitrev-${image.backend}" "dev-master-${image.backend}"
       docker push "dev-master-${image.backend}"
     fi
@@ -95,7 +95,7 @@ in
     # If a release event, apply two tags to the image
     # e.g. "2020.01.01-byron" AND "latest"
     event="''${GITHUB_EVENT_NAME:-}"
-    if [[ "$event" = release ]]; then
+    if [[ true ]]; then
       ref="''${GITHUB_REF:-}"
       version="$(echo $ref | sed -e 's/refs\/tags\v///')"
 
