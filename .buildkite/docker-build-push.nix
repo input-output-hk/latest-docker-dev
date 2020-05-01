@@ -83,6 +83,7 @@ in
     # An image is tagged for each commit
 
     echo "Pushing $fullrepo:$gitrev-${image.backend}"
+    docker tag "${image}" "$fullrepo:$gitrev-${image.backend}"
     docker push "$fullrepo:$gitrev-${image.backend}"
 
     # If branch is master, tag with "dev-master-${image.backend}"
