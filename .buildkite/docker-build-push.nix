@@ -97,17 +97,13 @@ in
     # e.g. "2020.01.01-byron" AND "latest"
     event="''${GITHUB_EVENT_NAME:-}"
     if [[ true ]]; then
-      ref="''${GITHUB_REF:-}"
-      ref="refs/tags/1900-00-00"
-      version="$(echo $ref | sed -e 's/refs\/tags\///')"
-
-      echo "Tagging with a version number: $fullrepo:$version-${image.backend}"
-      docker tag "$fullrepo:$gitrev-${image.backend}" "$fullrepo:$version-${image.backend}"
-      echo "Pushing $fullrepo:$version-${image.backend}"
-      docker push "$fullrepo:$version-${image.backend}"
+      echo "Tagging with a version number: $fullrepo:${image.imageTag}"
+      docker tag "$fullrepo:$gitrev-${image.backend}" "$fullrepo:${image.imageTag}"
+      echo "Pushing $fullrepo:${image.imageTag}"
+      docker push "$fullrepo:${image.imageTag}"
 
       echo "Tagging with: $fullrepo:${image.backend}"
-      docker tag "$fullrepo:$version-${image.backend}" "$fullrepo:${image.backend}"
+      docker tag "$fullrepo:${image.imageTag}" "$fullrepo:${image.backend}"
       echo "Pushing $fullrepo:${image.backend}"
       docker push "$fullrepo:${image.backend}"
 
