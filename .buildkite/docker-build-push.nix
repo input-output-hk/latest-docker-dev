@@ -99,7 +99,7 @@ in
     if [[ true ]]; then
       ref="''${GITHUB_REF:-}"
       ref="refs/tags/1900-00-00"
-      version="$(echo $ref | sed -e 's/refs\/tags\/v//')"
+      version="$(echo $ref | sed -e 's/refs\/tags\///')"
 
       echo "Tagging with a version number: $fullrepo:$version-${image.backend}"
       docker tag "$fullrepo:$gitrev-${image.backend}" "$fullrepo:$version-${image.backend}"
