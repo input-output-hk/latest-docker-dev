@@ -96,7 +96,7 @@ in
     # If a release event, apply two tags to the image
     # e.g. "2020.01.01-byron" AND "latest"
     event="''${GITHUB_EVENT_NAME:-}"
-    if [[ "$event" ]]; then
+    if [[ true ]]; then
       ref="''${GITHUB_REF:-}"
       version="$(echo $ref | sed -e 's/refs\/tags\v///')"
 
