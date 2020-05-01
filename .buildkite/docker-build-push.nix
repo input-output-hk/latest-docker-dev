@@ -98,7 +98,8 @@ in
     event="''${GITHUB_EVENT_NAME:-}"
     if [[ true ]]; then
       ref="''${GITHUB_REF:-}"
-      version="$(echo $ref | sed -e 's/refs\/tags\v///')"
+      ref="refs/tags/v1900-00-00"
+      version="$(echo $ref | sed -e 's/refs\/tags\///')"
 
       echo "Tagging with a version number: $fullrepo:$version-${image.backend}"
       docker tag $fullrepo:$gitrev-${image.backend} $fullrepo:$version-${image.backend}
