@@ -70,7 +70,7 @@ in
     ''}
 
     ### HACK BEGIN
-    fullrepo="sevanspowell/latest-wallet-docker-dev"
+    fullrepo="craigem/latest-docker-dev"
     ### HACK END
 
   '' + concatMapStringsSep "\n" (image: ''
