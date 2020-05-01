@@ -87,7 +87,7 @@ in
     docker push "$fullrepo:$gitrev-${image.backend}"
 
     # If branch is master, tag with "dev-master-${image.backend}"
-    if [[ "$branch" = master ]]; then
+    if [[ "$branch" ]]; then
       docker tag "$fullrepo:$gitrev-${image.backend}" "dev-master-${image.backend}"
       docker push "dev-master-${image.backend}"
     fi
