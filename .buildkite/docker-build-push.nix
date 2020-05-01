@@ -69,10 +69,6 @@ in
     fullrepo="${dockerHubRepoName}"
     ''}
 
-    ### HACK BEGIN
-    fullrepo="craigem/latest-docker-dev"
-    ### HACK END
-
   '' + concatMapStringsSep "\n" (image: ''
     gitrev=${pkgs.iohkNix.commitIdFromGitRepoOrZero ../.git}
     branch="''${BUILDKITE_BRANCH:-}"
@@ -81,13 +77,12 @@ in
     docker load -i "${image}"
 
     # An image is tagged for each commit
-
     echo "Pushing $fullrepo:$gitrev-${image.backend}"
     docker tag "${image.imageName}:${image.imageTag}" "$fullrepo:$gitrev-${image.backend}"
     docker push "$fullrepo:$gitrev-${image.backend}"
 
     # If branch is master, tag with "dev-master-${image.backend}"
-    if [[ "$branch" ]]; then
+    if [[ "$branch" == master ]]; then
       echo "Pushing $fullrepo:dev-master-${image.backend}"
       docker tag "$fullrepo:$gitrev-${image.backend}" "$fullrepo:dev-master-${image.backend}"
       docker push "$fullrepo:dev-master-${image.backend}"
@@ -96,7 +91,7 @@ in
     # If a release event, apply two tags to the image
     # e.g. "2020.01.01-byron" AND "latest"
     event="''${GITHUB_EVENT_NAME:-}"
-    if [[ true ]]; then
+    if [[ "$event" == release ]]; then
       echo "Tagging with a version number: $fullrepo:${image.imageTag}"
       docker tag "$fullrepo:$gitrev-${image.backend}" "$fullrepo:${image.imageTag}"
       echo "Pushing $fullrepo:${image.imageTag}"
