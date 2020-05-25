@@ -14,8 +14,8 @@ jobs:
         uses: buildkite/trigger-pipeline-action@v1.2.0
         env:
           BUILDKITE_API_ACCESS_TOKEN: ${{ secrets.Buildkite_Token }}
-          PIPELINE: "craigem/latest-docker-dev"
-          COMMIT: "HEAD"
+          PIPELINE: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
           BRANCH: "master"
           MESSAGE: ":github: Triggered from a GitHub Action"
           BUILD_ENV_VARS: "{\"GITHUB_REF\": \"${{ github.ref }}\", \"GITHUB_EVENT_NAME\": \"${{ github.event_name }}\" }"
